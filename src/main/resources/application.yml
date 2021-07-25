@@ -3,3 +3,11 @@ spring:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: myGroup
+
+kafka:
+  topic:
+    demo:
+      name: kafka-dev
+
+server:
+  port: 8081
