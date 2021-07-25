@@ -1,6 +1,6 @@
-package com.example.kafkademo.controller;
+package com.example.kafkademo.api;
 
-import com.example.kafkademo.service.KafkaProducerService;
+import com.example.kafkademo.adaptor.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class kafkaProducerController {
 
-    private final KafkaProducerService kafkaProducerService;
+    private final KafkaProducer kafkaProducer;
 
     @PostMapping(value = "/sendMessage")
     public void sendMessage(String message) {
-        kafkaProducerService.sendMessage(message);
+        kafkaProducer.sendMessage(message);
     }
 }
