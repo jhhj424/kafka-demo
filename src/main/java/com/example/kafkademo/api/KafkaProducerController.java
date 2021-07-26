@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class kafkaProducerController {
+public class KafkaProducerController {
 
     private final KafkaProducer kafkaProducer;
 
