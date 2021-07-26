@@ -1,4 +1,4 @@
-package com.example.kafkademo.adaptor;
+package com.example.kafkademo.adaptor.template;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,5 +1,6 @@
 package com.example.kafkademo.adaptor;
 
+import com.example.kafkademo.adaptor.template.KafkaDemoTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
