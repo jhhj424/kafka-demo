@@ -14,8 +14,11 @@ public class KafkaDemoTemplate {
     @Value("${kafka.topic.demo.name}")
     private String demoTopic;
 
-    // key 없는 이벤트 발행
     public void send(String message) {
         kafkaProducerTemplate.send(demoTopic, message);
+    }
+
+    public void send(String key, String message) {
+        kafkaProducerTemplate.send(demoTopic, key, message);
     }
 }
