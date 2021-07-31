@@ -1,5 +1,7 @@
 package com.example.kafkademo.config.kafka;
 
+import com.example.kafkademo.adaptor.dto.ProducerKey;
+import com.example.kafkademo.adaptor.dto.ProducerValue;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -23,7 +25,7 @@ public class KafkaProducerConfig {
     private final KafkaProperties kafkaProperties;
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public ProducerFactory<ProducerKey, ProducerValue> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
@@ -32,7 +34,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaProducerTemplate() {
+    public KafkaTemplate<ProducerKey, ProducerValue> kafkaProducerTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
