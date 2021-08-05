@@ -10,11 +10,9 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
 @Component
 @RequiredArgsConstructor
-public class KafkaConsumer implements EventListener<ConsumerKey, ConsumerValue> {
+public class KafkaConsumer extends DefaultEventListener<ConsumerKey, ConsumerValue> {
 
     private final KafkaConsumerService kafkaConsumerService;
 
@@ -28,15 +26,6 @@ public class KafkaConsumer implements EventListener<ConsumerKey, ConsumerValue> 
             @Payload(required = false) ConsumerValue consumerValue
     ) {
         consume(consumerKey, consumerValue);
-    }
-
-    @Override
-    public void consume(ConsumerKey consumerKey, ConsumerValue consumerValue) {
-        if (Objects.nonNull(consumerValue)) {
-            consumeEvent(consumerKey, consumerValue);
-            return;
-        }
-        consumeTombstoneEvent(consumerKey);
     }
 
     @Override
