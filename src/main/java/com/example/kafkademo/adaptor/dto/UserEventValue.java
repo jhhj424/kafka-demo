@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ConsumerValue {
+public class UserEventValue {
     private String name;
     private String email;
 }

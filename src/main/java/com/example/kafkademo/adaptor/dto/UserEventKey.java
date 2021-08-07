@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ConsumerKey {
+public class UserEventKey {
     private long id;
 }

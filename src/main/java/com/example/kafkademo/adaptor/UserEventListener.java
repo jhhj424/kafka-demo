@@ -1,8 +1,8 @@
 package com.example.kafkademo.adaptor;
 
-import com.example.kafkademo.adaptor.dto.ConsumerKey;
-import com.example.kafkademo.adaptor.dto.ConsumerValue;
-import com.example.kafkademo.application.KafkaConsumerService;
+import com.example.kafkademo.adaptor.dto.UserEventKey;
+import com.example.kafkademo.adaptor.dto.UserEventValue;
+import com.example.kafkademo.application.UserCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -12,33 +12,33 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserEventListener extends DefaultEventListener<ConsumerKey, ConsumerValue> {
+public class UserEventListener extends DefaultEventListener<UserEventKey, UserEventValue> {
 
-    private final KafkaConsumerService kafkaConsumerService;
+    private final UserCommandService userCommandService;
 
     @Override
     @KafkaListener(
-            topics = "${kafka.topic.demo.name}",
-            containerFactory = "kafkaListenerContainerFactory"
+            topics = "${kafka.topic.user.name}",
+            containerFactory = "kafkaUserListenerContainerFactory"
     )
     public void listen(
-            @Header(name = KafkaHeaders.RECEIVED_MESSAGE_KEY) ConsumerKey consumerKey,
-            @Payload(required = false) ConsumerValue consumerValue
+            @Header(name = KafkaHeaders.RECEIVED_MESSAGE_KEY) UserEventKey userEventKey,
+            @Payload(required = false) UserEventValue userEventValue
     ) {
-        consume(consumerKey, consumerValue);
+        consume(userEventKey, userEventValue);
     }
 
     @Override
-    public void consumeEvent(ConsumerKey consumerKey, ConsumerValue consumerValue) {
-        if (consumerKey.getId() > 0) {
-            kafkaConsumerService.update(consumerKey, consumerValue);
+    public void consumeEvent(UserEventKey userEventKey, UserEventValue userEventValue) {
+        if (userEventKey.getId() > 0) {
+            userCommandService.update(userEventKey, userEventValue);
             return;
         }
-        kafkaConsumerService.save(consumerKey, consumerValue);
+        userCommandService.save(userEventKey, userEventValue);
     }
 
     @Override
-    public void consumeTombstoneEvent(ConsumerKey consumerKey) {
-        kafkaConsumerService.delete(consumerKey);
+    public void consumeTombstoneEvent(UserEventKey userEventKey) {
+        userCommandService.delete(userEventKey);
     }
 }

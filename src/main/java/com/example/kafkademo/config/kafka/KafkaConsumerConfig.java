@@ -1,7 +1,7 @@
 package com.example.kafkademo.config.kafka;
 
-import com.example.kafkademo.adaptor.dto.ConsumerKey;
-import com.example.kafkademo.adaptor.dto.ConsumerValue;
+import com.example.kafkademo.adaptor.dto.UserEventKey;
+import com.example.kafkademo.adaptor.dto.UserEventValue;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +30,7 @@ public class KafkaConsumerConfig {
     private String groupId;
 
     @Bean
-    public ConsumerFactory<ConsumerKey, ConsumerValue> consumerFactory() {
+    public ConsumerFactory<UserEventKey, UserEventValue> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
@@ -40,8 +40,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<ConsumerKey, ConsumerValue> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<ConsumerKey, ConsumerValue> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<UserEventKey, UserEventValue> kafkaUserListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<UserEventKey, UserEventValue> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }

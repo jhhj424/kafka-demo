@@ -6,8 +6,8 @@ spring:
 
 kafka:
   topic:
-    demo:
-      name: kafka-dev
+    user:
+      name: kafka-user
 
 server:
   port: 8081
