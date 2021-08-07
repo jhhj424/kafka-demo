@@ -13,6 +13,10 @@ public class KafkaConsumerService {
         // TODO: 2021/08/02 
     }
 
+    public void update(ConsumerKey consumerKey, ConsumerValue consumerValue) {
+        // TODO: 2021/08/07
+    }
+
     public void delete(ConsumerKey consumerKey) {
         // TODO: 2021/08/02  
     }

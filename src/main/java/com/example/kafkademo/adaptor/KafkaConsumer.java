@@ -30,6 +30,10 @@ public class KafkaConsumer extends DefaultEventListener<ConsumerKey, ConsumerVal
 
     @Override
     public void consumeEvent(ConsumerKey consumerKey, ConsumerValue consumerValue) {
+        if (consumerKey.getId() > 0) {
+            kafkaConsumerService.update(consumerKey, consumerValue);
+            return;
+        }
         kafkaConsumerService.save(consumerKey, consumerValue);
     }
 
