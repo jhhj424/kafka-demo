@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class KafkaConsumer extends DefaultEventListener<ConsumerKey, ConsumerValue> {
+public class UserEventListener extends DefaultEventListener<ConsumerKey, ConsumerValue> {
 
     private final KafkaConsumerService kafkaConsumerService;
 
